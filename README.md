@@ -4,7 +4,7 @@ API-driven chat for an API-driven world.
 
 You won't find any message input boxes here... make a POST request!
 
-Built in Node/express/Typescript
+Built in Node/Express/Typescript
 
 ### Pre-reqs
 
@@ -13,10 +13,10 @@ Built in Node/express/Typescript
 
 ### Development
 
-Install
+#### Install
 
 `yarn install`
 
-Start dev server
+#### Start dev server
 
 `yarn dev`
