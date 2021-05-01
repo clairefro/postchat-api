@@ -1,10 +1,37 @@
 import express from "express";
+import mongoose from "mongoose";
+import { config } from "dotenv";
+
+config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.get("/", (_, res) => {
-  res.status(200).send();
-});
+// body parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.listen(port, () => console.log(`Running on port ${port}`));
+// app.use("/api/v1", router);
+
+// app.use(handleErrors);
+
+// connect to db and start server
+console.log(process.env.MONGO_URI);
+if (process.env.MONGO_URI) {
+  mongoose
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("MongoDB connected.");
+    })
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Example app listening at http://localhost:${port}`);
+      });
+    })
+    .catch((e) => console.error(e));
+} else {
+  console.error("Missing env var MONGO_URI. Could not connect to database.");
+}
