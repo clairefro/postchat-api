@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import { config } from "dotenv";
+import { handleErrors } from "./middleware/handleErrors";
+import { router } from "./router";
 
 config();
 
@@ -11,12 +13,12 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use("/api/v1", router);
+// apply routes
+app.use("/api/v1", router);
 
-// app.use(handleErrors);
+app.use(handleErrors);
 
 // connect to db and start server
-console.log(process.env.MONGO_URI);
 if (process.env.MONGO_URI) {
   mongoose
     .connect(process.env.MONGO_URI, {
