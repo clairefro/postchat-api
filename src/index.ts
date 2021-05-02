@@ -8,7 +8,7 @@ import { validator } from "./middleware/validator";
 config(); // get env vars from .env file
 
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // body parsing
 app.use(express.urlencoded({ extended: true }));
@@ -35,8 +35,8 @@ if (process.env.MONGO_URI) {
     })
     .then(() => {
       // start server
-      app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`);
+      app.listen(PORT, () => {
+        console.log(`Example app listening at http://localhost:${PORT}`);
       });
     })
     .catch((e) => console.error(e));

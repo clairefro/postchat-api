@@ -12,7 +12,7 @@ Built with Node/Express/Typescript/MongoDB
 - [yarn (1.x)](https://classic.yarnpkg.com/en/docs/install/)
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Use a node version manager such as [`n`](https://github.com/tj/n) to switch versions to `16.0.0`.
+Use a node version manager such as [`n`](https://github.com/tj/n) to switch `node` versions to `16.x`. For example:
 
 `n 16.0.0`
 
@@ -28,7 +28,7 @@ Copy the env defaults
 
 `cp .env.default .env`
 
-Then fill in the MongoDB values
+Then fill in the `MONGO_URI` value with a valid URI. (see [Data](#data))
 
 #### Start dev server
 
@@ -36,7 +36,7 @@ Then fill in the MongoDB values
 
 The dev server serves typescript files directly via `ts-node`, and automatically reloads when any file changes are made in `src`.
 
-#### Data
+#### <a name="data"></a>Data
 
 This API uses a free MongoDB cluster via [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) to persist data.
 
