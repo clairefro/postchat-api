@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import { handleErrors } from "./middleware/handleErrors";
 import { router } from "./router";
 import { validator } from "./middleware/validator";
+import { removeTrailingSlash } from "./middleware/removeTrailingSlash";
 
 config(); // get env vars from .env file
 
@@ -13,6 +14,9 @@ const PORT = process.env.PORT || 3000;
 // body parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// remove trailing slashes from requests
+app.use(removeTrailingSlash);
 
 // apply schema validation for incoming requests
 app.use(validator);

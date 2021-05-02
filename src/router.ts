@@ -8,11 +8,15 @@ const router = Router();
 
 const { roomController } = buildControllers();
 
-router.get("/", (_req, res) => {
-  res.send("You're in");
-});
-
 // Rooms -----------------------------
 router.post("/rooms", asyncHandler(roomController.createRoom));
+
+// Root ------------------------------
+router.get("/", (_req, res) => {
+  res.send({
+    message:
+      "Welcome to the Postchat API! To send a message. make a POST request to /api/v1/rooms/{roomId} with a { message: 'string' } body. You can get the roomId from your instructor.",
+  });
+});
 
 export { router };
