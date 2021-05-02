@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "16.0.0"
+  },
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "postinstall": "tsc",
+    "deploy": "git push heroku main"
   },
   "dependencies": {
     "cors": "^2.8.5",
