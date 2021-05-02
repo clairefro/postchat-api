@@ -27,6 +27,8 @@ Fill in MongoDB values
 
 `yarn dev`
 
+The dev server serves typescript files directly via `ts-node`, and automatically reloads when any file changes are made in `src`.
+
 #### Data
 
 This API uses a free MongoDB cluster via [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) to persist data.
