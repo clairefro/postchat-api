@@ -1,10 +1,11 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import { handleErrors } from "./middleware/handleErrors";
 import { router } from "./router";
+import { validator } from "./middleware/validator";
 
-config();
+config(); // get env vars from .env file
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,9 +14,13 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// apply schema validation for incoming requests
+app.use(validator);
+
 // apply routes
 app.use("/api/v1", router);
 
+// apply error handler
 app.use(handleErrors);
 
 // connect to db and start server
@@ -29,11 +34,14 @@ if (process.env.MONGO_URI) {
       console.log("MongoDB connected.");
     })
     .then(() => {
+      // start server
       app.listen(port, () => {
         console.log(`Example app listening at http://localhost:${port}`);
       });
     })
     .catch((e) => console.error(e));
 } else {
-  console.error("Missing env var MONGO_URI. Could not connect to database.");
+  console.error(
+    "Missing env var MONGO_URI. Could not connect to database. Aborting server start."
+  );
 }

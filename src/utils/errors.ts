@@ -1,9 +1,12 @@
 // learned this handy error util from: https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
 
 export class GeneralError extends Error {
-  constructor(message: string) {
+  errors: any[];
+
+  constructor(message: string, errors?: any[]) {
     super();
     this.message = message;
+    this.errors = errors || [];
   }
 
   getCode() {

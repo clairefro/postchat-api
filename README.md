@@ -4,7 +4,7 @@ API-driven chat for an API-driven world.
 
 You won't find any message input boxes here... make a POST request!
 
-Built in Node/Express/Typescript
+Built with Node/Express/Typescript/MongoDB
 
 ### Pre-reqs
 
@@ -17,13 +17,25 @@ Built in Node/Express/Typescript
 
 `yarn install`
 
+#### Copy env vars
+
+`cp .env.default .env`
+
+Fill in MongoDB values
+
 #### Start dev server
 
 `yarn dev`
 
 #### Data
 
-This API uses a free MongoDB via [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) to persist data.
+This API uses a free MongoDB cluster via [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) to persist data.
+
+##### Use exisiting dev db
+
+If you would like to use the exisitng development database, contact @clairefro for the credentials.
+
+##### Create your own cluster
 
 If you would like to create your own database for local testing or a fork of this API, [create an account](https://www.mongodb.com/cloud/atlas) and create a new cluster using the defaults.
 
