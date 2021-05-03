@@ -1,24 +1,34 @@
-// learned this handy error util from: https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
+export class BaseError extends Error {
+  statusCode;
+  errors;
+  error;
 
-export class GeneralError extends Error {
-  errors: any[];
-
-  constructor(message: string, errors?: any[]) {
+  constructor(statusCode: number, message: string, err?: any | any[]) {
     super();
+    this.statusCode = statusCode;
     this.message = message;
-    this.errors = errors || [];
-  }
-
-  getCode() {
-    if (this instanceof BadRequest) {
-      return 400;
-    }
-    if (this instanceof NotFound) {
-      return 404;
-    }
-    return 500;
+    this.errors = Array.isArray(err) ? err : undefined;
+    this.error = !Array.isArray(err) ? err : undefined;
   }
 }
 
-export class BadRequest extends GeneralError {}
-export class NotFound extends GeneralError {}
+export class ServerError extends BaseError {
+  constructor(message: string) {
+    const code = 500;
+    super(code, message);
+  }
+}
+
+export class BadRequestError extends BaseError {
+  constructor(message: string) {
+    const code = 400;
+    super(code, message);
+  }
+}
+
+export class NotFoundError extends BaseError {
+  constructor(message: string) {
+    const code = 404;
+    super(code, message);
+  }
+}

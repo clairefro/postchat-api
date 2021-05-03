@@ -6,9 +6,9 @@ export const handleErrors = (
   res: Response,
   _next: NextFunction
 ) => {
-  // format error
-  res.status(err.status || 500).json({
+  res.status(err.statusCode || 500).json({
+    status: "error",
     message: err.message,
-    errors: err.errors || [],
+    errors: err.errors,
   });
 };

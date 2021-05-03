@@ -5,14 +5,14 @@ info:
 servers:
   - url: "/api/v1"
 paths:
-  /rooms/{id}:
+  /rooms/{roomId}:
     get:
       summary: "Returns messsages and details for the given room"
       operationId: getRoom
       tags:
         - room
       parameters:
-        - name: id
+        - name: roomId
           in: path
           description: ID of the room
           required: true
@@ -37,14 +37,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /rooms/{id}/message:
+  /rooms/{roomId}/message:
     post:
       summary: "Adds a messsage to the given room"
       operationId: createMessage
       tags:
         - room
       parameters:
-        - name: id
+        - name: roomId
           in: path
           description: ID of the room
           required: true
@@ -139,11 +139,16 @@ components:
     Error:
       type: object
       required:
+        - status
         - message
       properties:
+        status:
+          type: string
+          enum: [error]
         message:
           type: string
         errors:
           type: array
           items: {} # any type
-
+        error:
+          type: object # any object

@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { GeneralError, NotFound } from "../utils/errors";
+import { ServerError } from "../utils/errors";
 import { Room } from "../models";
 
-export class RoomController {
+export default class RoomController {
   async createRoom(req: Request, res: Response) {
     const { title } = req.body;
     try {
       const room = await Room.create({ title });
       res.send(room);
     } catch (e) {
-      throw new GeneralError(JSON.stringify(e));
+      throw new ServerError(JSON.stringify(e));
     }
   }
 
