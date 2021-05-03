@@ -6,7 +6,89 @@ You won't find any message input boxes here... make a POST request!
 
 Built with Node/Express/Typescript/MongoDB
 
-### Pre-reqs
+### Docs
+
+Base url: `https://postchat-api.herokuapp.com/api/v1`
+
+#### Create a room
+
+`POST /rooms`
+
+Create a new room with a given title
+
+Example request body
+
+```json
+{
+  "title": "Fauxtech Institute"
+}
+```
+
+Example response
+
+```json
+{
+  "_id": "608f50f1a100f1eea3e01b01",
+  "title": "Fauxtech Institute",
+  "messages": []
+}
+```
+
+#### Get a room
+
+`GET /rooms/:roomId`
+
+Returns messages and info for room with given id
+
+Example response
+
+```json
+{
+  "_id": "608f50f1a100f1eea3e01b01",
+  "title": "Fauxtech Institute",
+  "messages": [
+    {
+      "_id": "608f50f1a100f1eea3e01b01",
+      "text": "laboris esse nulla cillum",
+      "username": "fugiat"
+    },
+    {
+      "_id": "608f5a7b39abc8f2152d67a6",
+      "text": "aliqua incididunt culpa Excepteur Duis",
+      "username": "dolore"
+    }
+  ]
+}
+```
+
+#### Send a message to a room
+
+Sends a message to room with given id in path
+
+`POST /rooms/:roomId/message`
+
+Example request body
+
+```json
+{
+  "text": "Look ma', no UI!",
+  "username": "postmanaut"
+}
+```
+
+Example response
+
+```json
+{
+  "_id": "208f50f1a100f1eea3e01b01",
+  "text": "Look ma', no UI!",
+  "username": "postmanaut"
+}
+```
+
+### Development
+
+#### Pre-reqs
 
 - [node](https://nodejs.org/en/download/)
 - [yarn (1.x)](https://classic.yarnpkg.com/en/docs/install/)
@@ -15,8 +97,6 @@ Built with Node/Express/Typescript/MongoDB
 Use a node version manager such as [`n`](https://github.com/tj/n) to switch `node` versions to `16.x`. For example:
 
 `n 16.0.0`
-
-### Development
 
 #### Install
 
@@ -42,7 +122,7 @@ This API uses a free MongoDB cluster via [MongoDB Atlas](https://www.mongodb.com
 
 ##### Use exisiting dev db
 
-If you would like to use the exisitng development database, contact @clairefro for the credentials.
+If you would like to use the existing production database, contact @clairefro for the credentials.
 
 ##### Create your own cluster
 
