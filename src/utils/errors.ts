@@ -1,11 +1,11 @@
 export class BaseError extends Error {
-  statusCode;
+  status;
   errors;
   error;
 
-  constructor(statusCode: number, message: string, err?: any | any[]) {
+  constructor(status: number, message: string, err?: any) {
     super();
-    this.statusCode = statusCode;
+    this.status = status;
     this.message = message;
     this.errors = Array.isArray(err) ? err : undefined;
     this.error = !Array.isArray(err) ? err : undefined;
@@ -13,22 +13,22 @@ export class BaseError extends Error {
 }
 
 export class ServerError extends BaseError {
-  constructor(message: string) {
+  constructor(message: string, err?: any) {
     const code = 500;
-    super(code, message);
+    super(code, message, err);
   }
 }
 
 export class BadRequestError extends BaseError {
-  constructor(message: string) {
+  constructor(message: string, err?: any) {
     const code = 400;
-    super(code, message);
+    super(code, message, err);
   }
 }
 
 export class NotFoundError extends BaseError {
-  constructor(message: string) {
+  constructor(message: string, err?: any) {
     const code = 404;
-    super(code, message);
+    super(code, message, err);
   }
 }
