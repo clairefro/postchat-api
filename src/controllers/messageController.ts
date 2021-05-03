@@ -1,43 +1,34 @@
 import { Request, Response } from "express";
-import { NotFoundError } from "../utils/errors";
+import { NotFoundError, ServerError } from "../utils/errors";
 import { Message, Room } from "../models";
 
 export default class MessageController {
   async createMessage(req: Request, res: Response) {
     const { text, username } = req.body;
     const { roomId } = req.params;
+    try {
+      const room = await Room.findOne({ _id: roomId });
 
-    const room = await Room.findOne({ _id: roomId });
+      if (!room) throw new NotFoundError(`Room with id ${roomId} not found.`);
 
-    if (!room) throw new NotFoundError(`Room with id ${roomId} not found.`);
+      const message = new Message({
+        room: roomId,
+        text,
+        username,
+      });
 
-    const message = new Message({
-      room: roomId,
-      text,
-      username,
-    });
+      await message.save();
 
-    await message.save();
+      // persist message to room
+      room.messages.push(message);
+      await room.save();
 
-    // persist message to room
-    room.messages.push(message);
-    await room.save();
-
-    res.send(message);
+      res.send(message);
+    } catch (e) {
+      throw new ServerError(
+        `Something went wrong when attempting to create message`,
+        e
+      );
+    }
   }
-
-  //   async getRoom(req, res) {
-  //     const {
-  //       params: { id },
-  //     } = req;
-
-  //     try {
-  //       const room = await Room.findById(id).populate("questions").exec();
-  //       res.send(publicRoom(room));
-  //     } catch (e) {
-  //       throw new NotFound(
-  //         `Error when fetching room with id: ${id}. Error: ${JSON.stringify(e)}`
-  //       );
-  //     }
-  //   }
 }

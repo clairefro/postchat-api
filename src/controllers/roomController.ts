@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ServerError } from "../utils/errors";
+import { NotFoundError, ServerError } from "../utils/errors";
 import { Room } from "../models";
 
 export default class RoomController {
@@ -13,18 +13,22 @@ export default class RoomController {
     }
   }
 
-  //   async getRoom(req, res) {
-  //     const {
-  //       params: { id },
-  //     } = req;
+  async getRoom(req: Request, res: Response) {
+    const {
+      params: { roomId },
+    } = req;
+    try {
+      const room = await Room.findOne({ _id: roomId })
+        .populate("messages")
+        .exec();
+      if (!room) throw new NotFoundError(`No room with id: ${roomId} found.`);
 
-  //     try {
-  //       const room = await Room.findById(id).populate("questions").exec();
-  //       res.send(publicRoom(room));
-  //     } catch (e) {
-  //       throw new NotFound(
-  //         `Error when fetching room with id: ${id}. Error: ${JSON.stringify(e)}`
-  //       );
-  //     }
-  //   }
+      res.send(room);
+    } catch (e) {
+      throw new ServerError(
+        `Something went wrong when fetching room with id: ${roomId}`,
+        e
+      );
+    }
+  }
 }

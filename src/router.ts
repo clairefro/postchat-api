@@ -9,6 +9,8 @@ const { roomController, messageController } = buildControllers();
 // Rooms -----------------------------
 router.post("/rooms", asyncHandler(roomController.createRoom));
 
+router.get("/rooms/:roomId", asyncHandler(roomController.getRoom));
+
 // Messages --------------------------
 router.post(
   "/rooms/:roomId/message",
