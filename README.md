@@ -63,9 +63,9 @@ Example response
 
 #### Send a message to a room
 
-Sends a message to room with given id in path
-
 `POST /rooms/:roomId/message`
+
+Sends a message to room with given id in path
 
 Example request body
 
