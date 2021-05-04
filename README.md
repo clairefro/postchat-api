@@ -2,7 +2,9 @@
 
 API-driven chat for an API-driven world.
 
-You won't find any message input boxes here... make a POST request!
+You won't find any message input boxes here... make a POST request to send a message!
+
+Messages can be viewd in real time from `https://postchat.netlify.app/rooms/:roomId` when using prod configuration.
 
 Built with Node/Express/Typescript/MongoDB
 
