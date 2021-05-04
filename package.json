@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "postinstall": "yarn build",
+    "heroku-postbuild": "yarn build",
     "clean": "rimraf dist/",
     "copy-other-files": "copyfiles -u 1 src/**/*.yaml dist/",
     "build": "yarn clean && tsc && yarn copy-other-files",
