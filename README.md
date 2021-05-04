@@ -140,3 +140,8 @@ To deploy to Heroku
 1. Request access as a collaborator on the postchat-api heroku project (contact @clairefro)
 1. Ensure your latest changes are merged into `main` and you've pulled the latest changes
 1. `yarn deploy`
+
+This app uses two build packs:
+
+1. heroku/nodejs
+1. zidizei/typescript
