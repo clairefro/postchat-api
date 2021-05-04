@@ -5,9 +5,8 @@ import { handleErrors } from "./middleware/handleErrors";
 import { router } from "./router";
 import { validator } from "./middleware/validator";
 import { removeTrailingSlash } from "./middleware/removeTrailingSlash";
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 import cors from "cors";
-import { addUser, deleteUser, getUser, getUsers } from "./socket/users";
 import { initCore } from "./socket/init";
 
 config(); // get env vars from .env file
