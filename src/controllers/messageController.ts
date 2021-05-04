@@ -23,6 +23,9 @@ export default class MessageController {
       room.messages.push(message);
       await room.save();
 
+      const io = req.app.get("io");
+      io.in(roomId).emit("MESSAGE", message);
+
       res.send(message);
     } catch (e) {
       throw new ServerError(
